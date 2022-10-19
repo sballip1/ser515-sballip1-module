@@ -1,6 +1,6 @@
 public class Person {
 
-	private ProductMenu theProductMenu();
+	private ProductMenu theProductMenu;
 
 	public void showMenu() {
 
