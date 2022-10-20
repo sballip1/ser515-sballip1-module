@@ -1,5 +1,21 @@
 public class Person {
 
+	public String username;
+
+	public int role;
+
+	private ClassProductList attachedProducts;
+
+	Person(String name,int role) {
+		username = name;
+		this.role = role;
+		attachedProducts = new ClassProductList();
+	}
+
+	public String getUsername(){
+		return  username;
+	}
+
 	private ProductMenu theProductMenu;
 
 	public void showMenu() {
@@ -29,4 +45,7 @@ public class Person {
 		return null;
 	}
 
+	public void addProduct(Product product) {
+		attachedProducts.add(product);
+	}
 }

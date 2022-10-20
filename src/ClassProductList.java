@@ -1,4 +1,10 @@
-public class ClassProductList {
+import java.util.ArrayList;
+
+public class ClassProductList extends ArrayList<Product> {
+
+	public ClassProductList(){
+
+	}
 
 	private ProductIterator productIterator;
 

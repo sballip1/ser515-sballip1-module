@@ -22,6 +22,7 @@ public class Login extends JFrame implements ActionListener{
     JButton submit, cancel;
     boolean valid;
 
+    String username;
     int role;
     Login() throws IOException {
         valid = true;
@@ -30,7 +31,7 @@ public class Login extends JFrame implements ActionListener{
         userRole = new ArrayList<Integer>();
         createGUI();
         populatePeople("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//SellerInfo.txt",1);
-        populatePeople("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//BuyerInfo.txt",2);
+        populatePeople("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//BuyerInfo.txt",0);
     }
 
     private void populatePeople(String path, int _role) throws IOException {
@@ -62,11 +63,12 @@ public class Login extends JFrame implements ActionListener{
     private void setValidity(String username, String pwd){
         for(int i = 0;i<users.size();i++) {
             String user = users.get(i);
-            if (user.equalsIgnoreCase(username)) {
+            if (user.equals(username)) {
                 valid = false;
                 role = userRole.get(i);
-                if (pwd.equalsIgnoreCase(password.get(i))) {
+                if (pwd.equals(password.get(i))) {
                     System.out.println("Successfully logged in: "+user+" "+role);
+                    username = user;
                     valid = true;
                 }
                 return;
@@ -78,7 +80,7 @@ public class Login extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         String userName = userName_text.getText();
         String password = password_text.getText();
-        setValidity(userName.trim(),password.trim());
+        setValidity(userName.trim(),password);
         if (getValidity()) {
             JOptionPane.showMessageDialog(null, "Login Successful");
         }
@@ -120,5 +122,13 @@ public class Login extends JFrame implements ActionListener{
         setTitle("Please Login Here !");
         setSize(450,350);
         setVisible(true);
+    }
+
+    public int getRole() {
+        return this.role;
+    }
+
+    public String getUsername(){
+        return this.username;
     }
 }

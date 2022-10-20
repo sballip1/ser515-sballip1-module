@@ -1,10 +1,15 @@
-import java.io.IOException;
+import java.io.*;
 
 /**
  * The interface class between the GUI and the underlining system, the
  * control logic and many of the operating functions are included in this class
  */
 public class PTBSFacade {
+
+    PTBSFacade(){
+        theProductList = new ClassProductList();
+        createProductList();
+    }
 
     /**
      * The type of the user.
@@ -41,8 +46,13 @@ public class PTBSFacade {
      */
     public boolean login() throws IOException {
         loginHelper = new Login();
-        return true;
+        loginHelper.waitForCreds();
+        if(loginHelper.getValidity()) {
+            UserType = loginHelper.getRole();
+        }
+        return loginHelper.getValidity();
     }
+
 
     /**
      * When clicking the add button of the ProductMenu, call this
@@ -94,16 +104,62 @@ public class PTBSFacade {
      *
      * @param userinfoitem
      */
-    public void createUser(UserInfoItem userinfoitem) {
-
+    public void createUser(UserInformation userinfoitem) {
+        if(this.UserType == 0) {
+            thePerson = new Buyer(userinfoitem.getName());
+        }
+        else thePerson = new Seller(userinfoitem.getName());
     }
 
     public void createProductList() {
-
+        theProductList = new ClassProductList();
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//ProductInfo.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String line;
+        while(true)
+        {
+            try {
+                if (!((line = br.readLine())!=null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String [] prod = line.split(":");
+            theProductList.add(new Product(prod[1]));
+        }
     }
 
     public void AttachProductToUser() {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String line;
+        while(true)
+        {
+            try {
+                if (!((line = br.readLine())!=null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String [] userProds = line.split(":");
+            if(userProds.equals(this.thePerson.getUsername())) {
+                if(matchProdName(userProds[1]))
+                    thePerson.addProduct(new Product(userProds[1]));
+            }
+        }
+    }
 
+    private boolean matchProdName(String userProd) {
+        for(Product p:theProductList) {
+            if(userProd.equalsIgnoreCase(p.name)) return true;
+        }
+        return false;
     }
 
     public Product SelectProduct() {
@@ -114,8 +170,8 @@ public class PTBSFacade {
 
     }
 
-    public boolean startApp() {
-        loginHelper.waitForCreds();
-        return loginHelper.getValidity();
+    public void startapp() {
+        createUser(new UserInformation(loginHelper.username,UserType));
+        AttachProductToUser();
     }
 }

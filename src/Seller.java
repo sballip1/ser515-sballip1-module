@@ -1,5 +1,9 @@
 public class Seller extends Person {
 
+	Seller(String name) {
+		super(name,1);
+	}
+
 	public void showMenu() {
 
 	}
