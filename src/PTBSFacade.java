@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 /**
  * The interface class between the GUI and the underlining system, the
  * control logic and many of the operating functions are included in this class
@@ -9,6 +11,7 @@ public class PTBSFacade {
      * Buyer: 0, Seller 1
      */
     private int UserType;
+
 
     /**
      * The object that holds the currently selected product.
@@ -30,12 +33,15 @@ public class PTBSFacade {
      */
     private Person thePerson;
 
+    private Login loginHelper;
+
     /**
      * Show login GUI and return the login result.
      * @return boolean
      */
-    public boolean login() {
-        return false;
+    public boolean login() throws IOException {
+        loginHelper = new Login();
+        return true;
     }
 
     /**
@@ -108,4 +114,8 @@ public class PTBSFacade {
 
     }
 
+    public boolean startApp() {
+        loginHelper.waitForCreds();
+        return loginHelper.getValidity();
+    }
 }
