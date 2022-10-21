@@ -1,7 +1,37 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class MeatProductMenu implements ProductMenu {
 
-	public void showMenu() {
+	MeatProductMenu(){
+		System.out.println("Initialised Meat product Menu..");
+	}
 
+	@Override
+	public void showMenu() {
+		System.out.println("Inside person Produce show menu..");
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//ProductInfo.txt"));
+		} catch (FileNotFoundException e) {
+			throw new RuntimeException(e);
+		}
+		String line;
+		System.out.println("Meat menu :");
+		while(true)
+		{
+			try {
+				if (!((line = br.readLine())!=null)) break;
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+			String [] prod = line.split(":");
+			if(prod[0].equalsIgnoreCase("Meat")) {
+				System.out.println(prod[1]);
+			}
+		}
 	}
 
 	public void showAddButton() {

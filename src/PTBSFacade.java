@@ -9,6 +9,30 @@ public class PTBSFacade {
     PTBSFacade(){
         theProductList = new ClassProductList();
         createProductList();
+        fetchTrades();
+    }
+
+    private void fetchTrades() {
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt"));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String line;
+        while(true)
+        {
+            try {
+                if (!((line = br.readLine())!=null)) break;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            String [] userProds = line.split(":");
+            Product p = new Product(userProds[1],0);
+            for(Product _p : tradingList) {
+                if(_p.name.equalsIgnoreCase(p.name)) p = _p;
+            }
+        }
     }
 
     /**
@@ -32,6 +56,8 @@ public class PTBSFacade {
      * The list of products of the entire system
      */
     private ClassProductList theProductList;
+
+    private ClassProductList tradingList;
 
     /**
      * The current user
@@ -63,7 +89,7 @@ public class PTBSFacade {
      * needs to be refreshed outside the function
      */
     public void addTrading() {
-
+        //thePerson.CreateProductMenu(theSelectedProduct);
     }
 
     /**
@@ -101,14 +127,15 @@ public class PTBSFacade {
     }
 
     /**
-     *
      * @param userinfoitem
+     * @param
      */
     public void createUser(UserInformation userinfoitem) {
+        System.out.println("creating user..");
         if(this.UserType == 0) {
-            thePerson = new Buyer(userinfoitem.getName());
+            thePerson = new Buyer(userinfoitem.getName(),nProductCategory);
         }
-        else thePerson = new Seller(userinfoitem.getName());
+        else thePerson = new Seller(userinfoitem.getName(),nProductCategory);
     }
 
     public void createProductList() {
@@ -128,7 +155,7 @@ public class PTBSFacade {
                 throw new RuntimeException(e);
             }
             String [] prod = line.split(":");
-            theProductList.add(new Product(prod[1]));
+            theProductList.add(new Product(prod[1],(prod[0].equalsIgnoreCase("meat"))?0:1));
         }
     }
 
@@ -150,7 +177,7 @@ public class PTBSFacade {
             String [] userProds = line.split(":");
             if(userProds.equals(this.thePerson.getUsername())) {
                 if(matchProdName(userProds[1]))
-                    thePerson.addProduct(new Product(userProds[1]));
+                    thePerson.addProduct(new Product(userProds[1],(userProds[0].equalsIgnoreCase("meat"))?0:1));
             }
         }
     }
@@ -163,7 +190,9 @@ public class PTBSFacade {
     }
 
     public Product SelectProduct() {
-        return null;
+        System.out.println("Select a product :");
+        thePerson.showMenu();
+        return new Product("",nProductCategory);
     }
 
     public void productOperation() {
@@ -171,7 +200,17 @@ public class PTBSFacade {
     }
 
     public void startapp() {
+        System.out.println("Select type");
+        nProductCategory = 0;
         createUser(new UserInformation(loginHelper.username,UserType));
         AttachProductToUser();
+        theSelectedProduct = SelectProduct();
+        viewTrading();
+        addTrading();
+    }
+
+    public void accept(NodeVisitor visitor) {
+        System.out.println("Visited Facade...");
+        visitor.visitFacade(this);
     }
 }

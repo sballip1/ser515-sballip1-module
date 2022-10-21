@@ -1,21 +1,33 @@
-public class ProductIterator {
 
-	private ClassProductList classProductList;
+public class ProductIterator extends ListIterator {
 
-	public boolean hasNext() {
-		return false;
+	ProductIterator(ClassProductList list) {
+		this._list=list;
+		pos = -1;
 	}
 
-	public Product Next() {
+	@Override
+	void moveToHead() {
+		pos=0;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return pos<_list.size()-1;
+	}
+
+	@Override
+	public Object next() {
+		if(hasNext()) {
+			pos++;
+			return _list.get(pos);
+		}
 		return null;
 	}
 
-	public void MoveToHead() {
-
+	@Override
+	public void remove() {
+		if(pos<_list.size())
+			_list.remove(pos);
 	}
-
-	public void Remove() {
-
-	}
-
 }

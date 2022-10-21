@@ -1,4 +1,4 @@
-public class Person {
+public abstract class Person {
 
 	public String username;
 
@@ -6,21 +6,22 @@ public class Person {
 
 	private ClassProductList attachedProducts;
 
-	Person(String name,int role) {
+	Person(String name, int role, int cat) {
+		System.out.println("inside Person constructor.."+cat);
 		username = name;
 		this.role = role;
 		attachedProducts = new ClassProductList();
+		if(cat==0) theProductMenu = new MeatProductMenu();
+		else theProductMenu = new ProduceProductMenu();
 	}
 
 	public String getUsername(){
 		return  username;
 	}
 
-	private ProductMenu theProductMenu;
+	protected ProductMenu theProductMenu;
 
-	public void showMenu() {
-
-	}
+	public abstract void showMenu() ;
 
 	/**
 	 *  
@@ -41,9 +42,7 @@ public class Person {
 
 	}
 
-	public ProductMenu CreateProductMenu() {
-		return null;
-	}
+	public abstract ProductMenu CreateProductMenu() ;
 
 	public void addProduct(Product product) {
 		attachedProducts.add(product);
