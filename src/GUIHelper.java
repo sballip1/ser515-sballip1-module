@@ -58,7 +58,7 @@ class GUIHelper extends JFrame {
         jRadioButton1.setText((type==1)?"Open auction for this product":"Bid for this product");
 
         // Setting text of "jRadioButton4".
-        jRadioButton2.setText((type==1)?"View buyers for this product":"View on sellers for this product");
+        jRadioButton2.setText((type==1)?"View buyers for this product":"View all sellers for this product");
 
         jRadioButton3.setText("View my transactions");
         // Setting Bounds of "jRadioButton2".
@@ -283,7 +283,7 @@ class GUIHelper extends JFrame {
         this.add(L1);
 
 
-        this.setBounds(100, y, 250, 200);
+        this.setBounds(100, 30, 250, y+100);
 
         // Setting Title of frame.
         this.setTitle("MENU EXCLUSIVE FOR " + buyer);

@@ -141,6 +141,7 @@ public class PTBSFacade {
 
     public void AttachProductToUser() {
         BufferedReader br = null;
+        System.out.println("kkdsasd");
         try {
             br = new BufferedReader(new FileReader("src//UserProduct.txt"));
         } catch (FileNotFoundException e) {
@@ -155,8 +156,9 @@ public class PTBSFacade {
                 throw new RuntimeException(e);
             }
             String [] userProds = line.split(":");
-            if(userProds.equals(this.thePerson.getUsername())) {
+            if(userProds[0].equals(this.thePerson.getUsername())) {
                 if(matchProdName(userProds[1]))
+                    System.out.println(userProds[1]+"kk");
                     thePerson.addProduct(new Product(userProds[1],(userProds[0].equalsIgnoreCase("meat"))?0:1));
             }
         }
@@ -203,6 +205,7 @@ public class PTBSFacade {
         System.out.println("------------------Fetching products using iterator pattern------------------");
         ProductIterator iterator = (ProductIterator) thePerson.attachedProducts.iterator();
         while(iterator.hasNext()) {
+            //System.out.println(iterator.next().name);
             bids.add(iterator.next().name);
         }
         GUIHelper gu = new GUIHelper();
