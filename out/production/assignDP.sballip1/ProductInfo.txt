@@ -1,7 +1,0 @@
-Meat:Beef
-Meat:Pork
-Meat:Mutton
-Produce:Tomato
-Produce:Onion
-Meat:Biryani
-Produce:paneer
