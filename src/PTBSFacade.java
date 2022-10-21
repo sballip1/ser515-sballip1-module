@@ -9,30 +9,6 @@ public class PTBSFacade {
     PTBSFacade(){
         theProductList = new ClassProductList();
         createProductList();
-        fetchTrades();
-    }
-
-    private void fetchTrades() {
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt"));
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        String line;
-        while(true)
-        {
-            try {
-                if (!((line = br.readLine())!=null)) break;
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            String [] userProds = line.split(":");
-            Product p = new Product(userProds[1],0);
-            for(Product _p : tradingList) {
-                if(_p.name.equalsIgnoreCase(p.name)) p = _p;
-            }
-        }
     }
 
     /**
@@ -40,6 +16,8 @@ public class PTBSFacade {
      * Buyer: 0, Seller 1
      */
     private int UserType;
+
+    private String username;
 
 
     /**
@@ -57,7 +35,7 @@ public class PTBSFacade {
      */
     private ClassProductList theProductList;
 
-    private ClassProductList tradingList;
+    private Trading trade;
 
     /**
      * The current user
@@ -89,7 +67,24 @@ public class PTBSFacade {
      * needs to be refreshed outside the function
      */
     public void addTrading() {
-        //thePerson.CreateProductMenu(theSelectedProduct);
+        trade.addTrading(thePerson,theSelectedProduct);
+        /*System.out.println("Adding a trade..");
+        FileWriter fw = null;
+        try {
+            fw = new FileWriter("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt", true);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        BufferedWriter bw = new BufferedWriter(fw);
+        try {
+            System.out.println(thePerson.username+":"+theSelectedProduct.name);
+            bw.write(thePerson.username+":"+theSelectedProduct.name);
+            bw.newLine();
+            bw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+*/
     }
 
     /**
@@ -101,7 +96,7 @@ public class PTBSFacade {
      * according to the type of the user.
      */
     public void viewTrading() {
-
+        trade.viewTrading();
     }
 
     /**
@@ -131,7 +126,7 @@ public class PTBSFacade {
      * @param
      */
     public void createUser(UserInformation userinfoitem) {
-        System.out.println("creating user..");
+        System.out.println("creating user.." + userinfoitem.getName());
         if(this.UserType == 0) {
             thePerson = new Buyer(userinfoitem.getName(),nProductCategory);
         }
@@ -185,6 +180,7 @@ public class PTBSFacade {
     private boolean matchProdName(String userProd) {
         for(Product p:theProductList) {
             if(userProd.equalsIgnoreCase(p.name)) return true;
+            if(userProd.equalsIgnoreCase(p.name)) return true;
         }
         return false;
     }
@@ -192,7 +188,7 @@ public class PTBSFacade {
     public Product SelectProduct() {
         System.out.println("Select a product :");
         thePerson.showMenu();
-        return new Product("",nProductCategory);
+        return new Product("Onion",nProductCategory);
     }
 
     public void productOperation() {
@@ -205,8 +201,14 @@ public class PTBSFacade {
         createUser(new UserInformation(loginHelper.username,UserType));
         AttachProductToUser();
         theSelectedProduct = SelectProduct();
+        fetchTrades();
+        trade = new Trading(theSelectedProduct,UserType);
         viewTrading();
         addTrading();
+    }
+
+    private void fetchTrades() {
+        trade = new Trading(theSelectedProduct,UserType);
     }
 
     public void accept(NodeVisitor visitor) {

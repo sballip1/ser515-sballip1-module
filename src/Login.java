@@ -68,7 +68,7 @@ public class Login extends JFrame implements ActionListener{
                 role = userRole.get(i);
                 if (pwd.equals(password.get(i))) {
                     System.out.println("Successfully logged in: "+user+" "+role);
-                    username = user;
+                    this.username = user;
                     valid = true;
                 }
                 return;

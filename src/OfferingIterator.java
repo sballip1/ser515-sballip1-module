@@ -1,21 +1,32 @@
-public class OfferingIterator {
+public class OfferingIterator extends ListIterator {
 
-	private OfferingList offeringList;
-
-	public boolean hasNext() {
-		return false;
+	OfferingIterator(OfferingList list) {
+		this._list=list;
+		pos = -1;
 	}
 
-	public Offering Next() {
+	@Override
+	void moveToHead() {
+		pos=0;
+	}
+
+	@Override
+	public boolean hasNext() {
+		return pos<_list.size()-1;
+	}
+
+	@Override
+	public Offering next() {
+		if(hasNext()) {
+			pos++;
+			return (Offering) _list.get(pos);
+		}
 		return null;
 	}
 
-	public void MoveToHead() {
-
+	@Override
+	public void remove() {
+		if(pos<_list.size())
+			_list.remove(pos);
 	}
-
-	public void Remove() {
-
-	}
-
 }

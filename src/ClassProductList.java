@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ClassProductList extends ArrayList<Product> {
 
@@ -6,7 +7,10 @@ public class ClassProductList extends ArrayList<Product> {
 
 	}
 
-	private ProductIterator productIterator;
+	@Override
+	public Iterator<Product> iterator() {
+		return (Iterator<Product>) new ProductIterator(this);
+	}
 
 	public void accept(NodeVisitor visitor) {
 		System.out.println("Visited Class ProductList. Now iterating visitProduct on the Product list...");
