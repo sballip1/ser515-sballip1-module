@@ -42,6 +42,8 @@ class GUIHelper extends JFrame {
         // Initialization of object of "JRadioButton" class.
         jRadioButton2 = new JRadioButton();
 
+        JRadioButton jRadioButton3 = new JRadioButton();
+
         // Initialization of object of "JButton" class.
         jButton = new JButton("Click");
 
@@ -58,14 +60,16 @@ class GUIHelper extends JFrame {
         // Setting text of "jRadioButton4".
         jRadioButton2.setText((type==1)?"View buyers for this product":"View on sellers for this product");
 
+        jRadioButton3.setText("View my transactions");
         // Setting Bounds of "jRadioButton2".
         jRadioButton1.setBounds(120, 30, 500, 50);
 
         // Setting Bounds of "jRadioButton4".
         jRadioButton2.setBounds(120, 80, 500, 50);
 
+        jRadioButton3.setBounds(120, 130, 500, 50);
         // Setting Bounds of "jButton".
-        jButton.setBounds(125, 140, 80, 30);
+        jButton.setBounds(125, 180, 80, 30);
 
         // Setting Bounds of JLabel "L2".
         L1.setBounds(20, 30, 150, 50);
@@ -76,6 +80,7 @@ class GUIHelper extends JFrame {
 
         // Adding "jRadioButton4" on JFrame.
         this.add(jRadioButton2);
+        this.add(jRadioButton3);
 
         // Adding "jButton" on JFrame.
         this.add(jButton);
@@ -86,6 +91,7 @@ class GUIHelper extends JFrame {
         // Adding "jRadioButton1" and "jRadioButton3" in a Button Group "G2".
         G1.add(jRadioButton1);
         G1.add(jRadioButton2);
+        G1.add(jRadioButton3);
 
         this.setBounds(100, 100, 400, 300);
 
@@ -115,6 +121,11 @@ class GUIHelper extends JFrame {
                 else if (jRadioButton2.isSelected()) {
 
                     choice = 1;
+                }
+
+                else if (jRadioButton3.isSelected()) {
+
+                    choice = 2;
                 }
                 else {
 
@@ -232,7 +243,6 @@ class GUIHelper extends JFrame {
     }
 
     public void populateRadioButtons2(ArrayList<String> list, String buyer) {
-        System.out.println("Populating radio buttons..");
         buttons = new ArrayList<JRadioButton>();
         ArrayList<String> values = new ArrayList<String>();
         // Setting layout as null of JFrame.
@@ -247,13 +257,13 @@ class GUIHelper extends JFrame {
 
         // Initialization of object of " JLabel" class.
         L1 = new JLabel("list" );
-        int x = 120, y = 120;
+        int x = 100, y = 30;
         for (String s : list) {
             System.out.println(s);
             JRadioButton but = new JRadioButton();
             but.setText(s);
-            but.setBounds(30, 30, 120, 50);
-            x += y;
+            but.setBounds(30, y, 120, 50);
+            y=y+x;
             values.add(s);
             this.add(but);
             G1.add(but);
@@ -261,10 +271,9 @@ class GUIHelper extends JFrame {
         }
 
         // Setting Bounds of "jButton".
-        jButton.setBounds(125, 90, 80, 30);
+        jButton.setBounds(25, y, 150, 30);
 
         // Setting Bounds of JLabel "L2".
-        L1.setBounds(20, 30, 150, 50);
 
 
         // Adding "jButton" on JFrame.
@@ -274,7 +283,7 @@ class GUIHelper extends JFrame {
         this.add(L1);
 
 
-        this.setBounds(100, 100, x + 100, 200);
+        this.setBounds(100, y, 250, 200);
 
         // Setting Title of frame.
         this.setTitle("MENU EXCLUSIVE FOR " + buyer);
@@ -306,6 +315,7 @@ class GUIHelper extends JFrame {
                 synchronized (lock) {
                     lock.notify();
                 }
+                JOptionPane.showMessageDialog(null, "Functionality coming soon. Keep watching..");
 
             }
         });
@@ -313,10 +323,8 @@ class GUIHelper extends JFrame {
 
     public void populateRadioButtons(ArrayList<String> list, String buyer)
     {
-        System.out.println("Populating radio buttons..");
         buttons = new ArrayList<JRadioButton>();
         ArrayList<String> values = new ArrayList<String>();
-        // Setting layout as null of JFrame.
         this.setLayout(null);
 
 

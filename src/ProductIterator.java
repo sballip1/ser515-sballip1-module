@@ -17,10 +17,10 @@ public class ProductIterator extends ListIterator {
 	}
 
 	@Override
-	public Object next() {
+	public Product next() {
 		if(hasNext()) {
 			pos++;
-			return _list.get(pos);
+			return (Product) _list.get(pos);
 		}
 		return null;
 	}

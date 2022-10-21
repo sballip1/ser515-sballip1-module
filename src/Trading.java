@@ -36,7 +36,6 @@ public class Trading {
 	}
 
 	public Trading(Product theSelectedProduct, int userType) {
-		System.out.println("populating trading info...");
 		this.product = theSelectedProduct;
 		this.userType = userType;
 		offers = new OfferingList();
@@ -66,6 +65,7 @@ public class Trading {
 	public void viewTrading(){
 		System.out.println("viewing trading info..");
 		ArrayList<String> stakeholders = new ArrayList<String>();
+		System.out.println("------------------Fetching offers using iterator pattern------------------");
 		OfferingIterator iterator = (OfferingIterator) offers.iterator();
 		while(iterator.hasNext()) {
 			stakeholders.add(iterator.next().username);

@@ -50,6 +50,7 @@ public class PTBSFacade {
      * @return boolean
      */
     public boolean login() throws IOException {
+        System.out.println("------------------Facade pattern helping to login------------------");
         loginHelper = new Login();
         loginHelper.waitForCreds();
         if(loginHelper.getValidity()) {
@@ -68,6 +69,7 @@ public class PTBSFacade {
      * needs to be refreshed outside the function
      */
     public void addTrading() {
+        System.out.println("------------------Creating product menu and adding using the Factory pattern------------------");
         thePerson.CreateProductMenu(trade);
     }
 
@@ -169,6 +171,7 @@ public class PTBSFacade {
     }
 
     public Product SelectProduct() {
+        System.out.println("------------------Show relevant menu using Bridge pattern------------------");
         return thePerson.showMenu();
     }
 
@@ -187,12 +190,24 @@ public class PTBSFacade {
         fetchTrades();
         trade = new Trading(theSelectedProduct,UserType);
         gu = new GUIHelper();
-        ArrayList<String> list = new ArrayList<String>();
         gu.populateRadioButtonsM(UserType);
         gu.waitForPlay();
         int choice = gu.choice;
         if(choice==1) viewTrading();
+        else if(choice==2) viewMyBids();
         else addTrading();
+    }
+
+    private void viewMyBids() {
+        ArrayList<String> bids = new ArrayList<String>();
+        System.out.println("------------------Fetching products using iterator pattern------------------");
+        ProductIterator iterator = (ProductIterator) thePerson.attachedProducts.iterator();
+        while(iterator.hasNext()) {
+            bids.add(iterator.next().name);
+        }
+        GUIHelper gu = new GUIHelper();
+        gu.populateRadioButtons2(bids,"My bids");
+        gu.waitForPlay();
     }
 
     private void fetchTrades() {

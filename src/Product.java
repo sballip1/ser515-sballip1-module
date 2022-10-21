@@ -7,7 +7,6 @@ public class Product {
     public int type;
 
     Product(String name,int type) {
-        System.out.println("Adding product : "+name+ " to the system");
         this.name = name;
     }
     public void accept(NodeVisitor visitor) {

@@ -6,7 +6,7 @@ public abstract class Person {
 
 	public int cat;
 
-	private ClassProductList attachedProducts;
+	public ClassProductList attachedProducts;
 
 	Person(String name, int role, int cat) {
 		this.cat = cat;
