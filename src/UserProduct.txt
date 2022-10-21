@@ -5,9 +5,3 @@ mimi:Onion
 pepe:Beef
 pepe:Tomato
 pepe:Onion
-tutu:Onion
-pepe:Onion
-tutu:Onion
-tutu:Beef
-pepe:paneer
-tutu:Pork

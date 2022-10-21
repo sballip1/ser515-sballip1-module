@@ -36,9 +36,9 @@ public class PTBSFacade {
     /**
      * The list of products of the entire system
      */
-    private ClassProductList theProductList;
+    public ClassProductList theProductList;
 
-    private Trading trade;
+    public Trading trade;
 
     /**
      * The current user
@@ -106,6 +106,7 @@ public class PTBSFacade {
     }
 
     public void remind() {
+        accept(new ReminderVisitor());
     }
 
     /**
@@ -200,6 +201,7 @@ public class PTBSFacade {
         if(choice==1) viewTrading();
         else if(choice==2) viewMyBids();
         else addTrading();
+        remind();
     }
 
     private void viewMyBids() {
@@ -220,7 +222,7 @@ public class PTBSFacade {
     }
 
     public void accept(NodeVisitor visitor) {
-        System.out.println("Visited Facade...");
+        System.out.println("------------------Accessing facade via visitor design pattern------------------");
         visitor.visitFacade(this);
     }
 }

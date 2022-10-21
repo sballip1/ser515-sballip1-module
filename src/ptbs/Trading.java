@@ -100,7 +100,7 @@ public class Trading {
 	 *  
 	 */
 	public void accept(NodeVisitor visitor) {
-		System.out.println("Visited ptbs.Trading...");
+		System.out.println("Visited ptTrading...");
 		visitor.visitTrading(this);
 	}
 
