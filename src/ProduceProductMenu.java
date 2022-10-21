@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProduceProductMenu implements ProductMenu {
 
@@ -9,8 +10,9 @@ public class ProduceProductMenu implements ProductMenu {
 		System.out.println("Initialised Produce product Menu..");
 	}
 
-	public void showMenu() {
+	public ArrayList<String> showMenu() {
 		System.out.println("Inside person Produce show menu..");
+		ArrayList<String> ps = new ArrayList<String>();
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader("src//ProductInfo.txt"));
@@ -28,9 +30,11 @@ public class ProduceProductMenu implements ProductMenu {
 			}
 			String [] prod = line.split(":");
 			if(prod[0].equalsIgnoreCase("Produce")) {
-				System.out.println(prod[1]);
+				ps.add(prod[1]);
+				//System.out.println(prod[1]);
 			}
 		}
+		return ps;
 	}
 
 	public void showAddButton() {

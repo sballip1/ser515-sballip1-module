@@ -1,12 +1,19 @@
+import java.util.ArrayList;
+
 public class Buyer extends Person {
 
 	Buyer(String name, int cat) {
 		super(name,0,cat);
 	}
 
-	public void showMenu() {
+	public Product showMenu() {
 		System.out.println("Calling show menu in Buyer..");
-		this.theProductMenu.showMenu();
+		ArrayList<String> list = this.theProductMenu.showMenu();
+		System.out.println(list.get(0));
+		GUIHelper gu = new GUIHelper();
+		gu.populateRadioButtons(list,"Buyer");
+		gu.waitForPlay();
+		return new Product(gu.productName,this.cat);
     }
 
 	public ProductMenu CreateProductMenu(Trading trade) {

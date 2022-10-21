@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * The interface class between the GUI and the underlining system, the
@@ -101,7 +102,6 @@ public class PTBSFacade {
     }
 
     public void remind() {
-
     }
 
     /**
@@ -109,7 +109,7 @@ public class PTBSFacade {
      * @param
      */
     public void createUser(UserInformation userinfoitem) {
-        System.out.println("creating user.." + userinfoitem.getName());
+        System.out.println("creating user..." + userinfoitem.getName());
         if(this.UserType == 0) {
             thePerson = new Buyer(userinfoitem.getName(),nProductCategory);
         }
@@ -169,9 +169,7 @@ public class PTBSFacade {
     }
 
     public Product SelectProduct() {
-        System.out.println("Select a product :");
-        thePerson.showMenu();
-        return new Product("Onion",nProductCategory);
+        return thePerson.showMenu();
     }
 
     public void productOperation() {
@@ -179,15 +177,22 @@ public class PTBSFacade {
     }
 
     public void startapp() {
-        System.out.println("Select type");
-        nProductCategory = 0;
+        GUIHelper gu = new GUIHelper();
+        gu.populateRadioButtons(UserType);
+        gu.waitForPlay();
+        nProductCategory = gu.menuType;
         createUser(new UserInformation(loginHelper.username,UserType));
         AttachProductToUser();
         theSelectedProduct = SelectProduct();
         fetchTrades();
         trade = new Trading(theSelectedProduct,UserType);
-        viewTrading();
-        addTrading();
+        gu = new GUIHelper();
+        ArrayList<String> list = new ArrayList<String>();
+        gu.populateRadioButtonsM(UserType);
+        gu.waitForPlay();
+        int choice = gu.choice;
+        if(choice==1) viewTrading();
+        else addTrading();
     }
 
     private void fetchTrades() {

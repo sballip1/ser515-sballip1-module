@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class Trading {
 
@@ -64,10 +65,14 @@ public class Trading {
 
 	public void viewTrading(){
 		System.out.println("viewing trading info..");
+		ArrayList<String> stakeholders = new ArrayList<String>();
 		OfferingIterator iterator = (OfferingIterator) offers.iterator();
 		while(iterator.hasNext()) {
-			System.out.println(iterator.next().username);
+			stakeholders.add(iterator.next().username);
 		}
+		GUIHelper gu = new GUIHelper();
+		gu.populateRadioButtons2(stakeholders,(userType==0)?"List of Sellers":"List of Buyers");
+		gu.waitForPlay();
 	}
 
 	public void addTrading(Person thePerson){

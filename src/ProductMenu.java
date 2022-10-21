@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+
 public interface ProductMenu {
 
-	public abstract void showMenu();
+	public abstract ArrayList<String> showMenu();
 
 	/**
 	 *  

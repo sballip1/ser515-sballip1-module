@@ -8,3 +8,5 @@ pepe:Onion
 tutu:Onion
 pepe:Onion
 tutu:Onion
+tutu:Beef
+pepe:paneer

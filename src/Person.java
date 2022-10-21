@@ -4,9 +4,12 @@ public abstract class Person {
 
 	public int role;
 
+	public int cat;
+
 	private ClassProductList attachedProducts;
 
 	Person(String name, int role, int cat) {
+		this.cat = cat;
 		System.out.println("inside Person constructor.."+cat);
 		username = name;
 		this.role = role;
@@ -21,7 +24,7 @@ public abstract class Person {
 
 	protected ProductMenu theProductMenu;
 
-	public abstract void showMenu() ;
+	public abstract Product showMenu() ;
 
 	/**
 	 *  
