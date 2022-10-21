@@ -42,7 +42,7 @@ public abstract class Person {
 
 	}
 
-	public abstract ProductMenu CreateProductMenu() ;
+	public abstract ProductMenu CreateProductMenu(Trading trade) ;
 
 	public void addProduct(Product product) {
 		attachedProducts.add(product);

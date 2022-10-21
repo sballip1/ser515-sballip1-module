@@ -12,9 +12,9 @@ public class Trading {
 		BufferedReader br = null;
 		String path = null;
 		if(this.userType==0)
-			path = "C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//SellerInfo.txt";
+			path = "src//SellerInfo.txt";
 		else
-			path = "C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//BuyerInfo.txt";
+			path = "src//BuyerInfo.txt";
 		try {
 			br = new BufferedReader(new FileReader(path));
 		} catch (FileNotFoundException e) {
@@ -41,7 +41,7 @@ public class Trading {
 		offers = new OfferingList();
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt"));
+			br = new BufferedReader(new FileReader("src//UserProduct.txt"));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -70,18 +70,18 @@ public class Trading {
 		}
 	}
 
-	public void addTrading(Person thePerson, Product theSelectedProduct){
+	public void addTrading(Person thePerson){
 		System.out.println("Adding a trade..");
 		FileWriter fw = null;
 		try {
-			fw = new FileWriter("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt", true);
+			fw = new FileWriter("src//UserProduct.txt", true);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		BufferedWriter bw = new BufferedWriter(fw);
 		try {
-			System.out.println(thePerson.username+":"+theSelectedProduct.name);
-			bw.write(thePerson.username+":"+theSelectedProduct.name);
+			System.out.println(thePerson.username+":"+product.name);
+			bw.write(thePerson.username+":"+product.name);
 			bw.newLine();
 			bw.close();
 		} catch (IOException e) {

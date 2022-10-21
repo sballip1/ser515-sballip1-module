@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Login extends JFrame implements ActionListener{
@@ -30,8 +32,10 @@ public class Login extends JFrame implements ActionListener{
         password = new ArrayList<String>();
         userRole = new ArrayList<Integer>();
         createGUI();
-        populatePeople("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//SellerInfo.txt",1);
-        populatePeople("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//BuyerInfo.txt",0);
+        Path path = FileSystems.getDefault().getPath("").toAbsolutePath();
+        //System.out.println(""path);
+        populatePeople("src//SellerInfo.txt",1);
+        populatePeople("src//BuyerInfo.txt",0);
     }
 
     private void populatePeople(String path, int _role) throws IOException {

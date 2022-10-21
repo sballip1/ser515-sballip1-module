@@ -67,24 +67,7 @@ public class PTBSFacade {
      * needs to be refreshed outside the function
      */
     public void addTrading() {
-        trade.addTrading(thePerson,theSelectedProduct);
-        /*System.out.println("Adding a trade..");
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt", true);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        BufferedWriter bw = new BufferedWriter(fw);
-        try {
-            System.out.println(thePerson.username+":"+theSelectedProduct.name);
-            bw.write(thePerson.username+":"+theSelectedProduct.name);
-            bw.newLine();
-            bw.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-*/
+        thePerson.CreateProductMenu(trade);
     }
 
     /**
@@ -137,7 +120,7 @@ public class PTBSFacade {
         theProductList = new ClassProductList();
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//ProductInfo.txt"));
+            br = new BufferedReader(new FileReader("src//ProductInfo.txt"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -157,7 +140,7 @@ public class PTBSFacade {
     public void AttachProductToUser() {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//UserProduct.txt"));
+            br = new BufferedReader(new FileReader("src//UserProduct.txt"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

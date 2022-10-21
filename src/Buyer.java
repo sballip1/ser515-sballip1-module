@@ -9,7 +9,9 @@ public class Buyer extends Person {
 		this.theProductMenu.showMenu();
     }
 
-	public ProductMenu CreateProductMenu() {
+	public ProductMenu CreateProductMenu(Trading trade) {
+		System.out.println("Creating product menu for Buyer..");
+		trade.addTrading(this);
 		return null;
 	}
 

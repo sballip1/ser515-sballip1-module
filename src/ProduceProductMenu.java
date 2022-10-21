@@ -13,7 +13,7 @@ public class ProduceProductMenu implements ProductMenu {
 		System.out.println("Inside person Produce show menu..");
 		BufferedReader br = null;
 		try {
-			br = new BufferedReader(new FileReader("C://Users//sballip1//Documents//Fall '22//515//assignDP.sballip1//src//ProductInfo.txt"));
+			br = new BufferedReader(new FileReader("src//ProductInfo.txt"));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
